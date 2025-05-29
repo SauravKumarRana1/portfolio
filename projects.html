@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projects - Portfolio</title>
+<style>
+  /* RESET & BASE */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000000;
+    color: #4da6ff;
+    scroll-behavior: smooth;
+  }
+  a {
+    color: #4da6ff;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    color: #3399ff;
+    outline: none;
+  }
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #0a0a0acc;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 12px rgba(77,166,255,0.7);
+    z-index: 1000;
+  }
+  nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1rem;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: #4da6ff;
+    text-shadow: 0 0 8px #4da6ffbb;
+    user-select: none;
+  }
+  .nav-link {
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    color: #99cfff;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+  .nav-link:hover, .nav-link:focus {
+    background-color: #4da6ff44;
+    color: #4da6ff;
+    outline: none;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 90px auto 60px;
+    padding: 0 1rem 40px;
+  }
+  h1.page-title {
+    font-size: 3.25rem;
+    font-weight: 900;
+    text-align: center;
+    user-select: none;
+    margin-bottom: 1rem;
+    color: #4da6ff;
+    text-shadow: 0 0 18px #3399ffcc;
+  }
+  /* Buttons below page title */
+  .category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .category-button {
+    background-color: #004080;
+    border: 2px solid #4da6ff;
+    color: #4da6ff;
+    font-weight: 700;
+    padding: 0.7rem 2rem;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #4da6ff88;
+    font-size: 1.05rem;
+    user-select: none;
+    perspective: 1000px;
+    transition: 
+      background-color 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+  }
+  .category-button:hover, 
+  .category-button:focus {
+    background-color: #4da6ff;
+    color: #001a33;
+    box-shadow: 0 0 22px #4da6ffcc, 0 0 40px #3399ffcc;
+    outline: none;
+    transform: scale(1.07);
+  }
+
+  /* Section titles */
+  section {
+    margin-top: 3rem;
+  }
+  section h2.section-subtitle {
+    font-size: 2.2rem;
+    color: #3399ff;
+    margin-bottom: 1.2rem;
+    border-bottom: 3px solid #4da6ff;
+    display: inline-block;
+    padding-bottom: 6px;
+    user-select: none;
+    text-shadow: 0 0 12px #3399ffcc;
+  }
+
+  /* Projects grid inside each section */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 1.8rem;
+  }
+  /* Project Card */
+  .project-card {
+    background-color: #001722;
+    border-radius: 14px;
+    box-shadow: 0 0 18px #4da6ffcc;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+  .project-card:hover, .project-card:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #3399ffee;
+    outline: none;
+  }
+  .project-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 3px solid #4da6ff;
+  }
+  .project-content {
+    padding: 1rem 1.3rem 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .project-title {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #4da6ff;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 0 12px #3399ffbb;
+  }
+  .project-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #a3cfff;
+    flex-grow: 1;
+  }
+  /* Project links container */
+  .project-links {
+    margin-top: 1rem;
+  }
+  .project-links a {
+    background-color: #004080;
+    color: #99cfff;
+    font-weight: 700;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    margin-right: 1rem;
+    font-size: 0.95rem;
+    box-shadow: 0 0 8px #4da6ffaa;
+    display: inline-block;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    user-select: none;
+    text-align: center;
+  }
+  .project-links a:hover, .project-links a:focus {
+    background-color: #3399ff;
+    color: #001d33;
+    box-shadow: 0 0 20px #3399ffdd;
+    outline: none;
+    transform: scale(1.08);
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 480px) {
+    main {
+      margin-top: 70px;
+      padding-bottom: 30px;
+    }
+    .project-card {
+      flex-direction: column;
+    }
+    .project-image {
+      height: 150px;
+    }
+  }
+</style>
+<!-- FontAwesome icons for external links -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo" tabindex="0">SauReign Eskch</div>
+    <div class="nav-link" role="link" tabindex="0" id="backPortfolioBtn" aria-label="Back to main portfolio page">← Back to Portfolio</div>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title">Projects</h1>
+
+  <!-- Category buttons -->
+  <div class="category-buttons" role="navigation" aria-label="Project category navigation">
+    <button class="category-button" data-target="html-projects" type="button">HTML</button>
+    <button class="category-button" data-target="python-projects" type="button">Python</button>
+    <button class="category-button" data-target="java-projects" type="button">Java</button>
+  </div>
+
+  <section id="html-projects" aria-label="HTML Projects">
+    <h2 class="section-subtitle">HTML Projects</h2>
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1505682634904-d7c04624e59c?auto=format&fit=crop&w=600&q=80" alt="Responsive Website Screenshot" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title">Responsive Website</h3>
+          <p class="project-description">A clean and accessible responsive website built with semantic HTML5 and CSS3.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fas fa-globe"></i> Live</a>
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80" alt="HTML Email Template" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title">HTML Email Template</h3>
+          <p class="project-description">A compatible and visually engaging email template designed for cross-client support.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fas fa-envelope"></i> Live</a>
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="python-projects" aria-label="Python Projects">
+    <h2 class="section-subtitle">Python Projects</h2>
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1537432376769-00a3a4fad5ac?auto=format&fit=crop&w=600&q=80" alt="Data Analysis Screenshot" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title">Data Analysis Tool</h3>
+          <p class="project-description">A Python application utilizing pandas and matplotlib to analyze and visualize data sets.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1555949963-9e6f9b1f61b3?auto=format&fit=crop&w=600&q=80" alt="Machine Learning Screenshot" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title">Machine Learning Model</h3>
+          <p class="project-description">Implemented supervised ML model for classification using Scikit-learn and Python.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="java-projects" aria-label="Java Projects">
+    <h2 class="section-subtitle">Java Projects</h2>
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1581091012184-20015b67001e?auto=format&fit=crop&w=600&q=80" alt="Inventory Management Screenshot" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title">Inventory Management System</h3>
+          <p class="project-description">A Java desktop app with GUI for managing inventory records and transactions efficiently.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1573164574395-45426ed4491b?auto=format&fit=crop&w=600&q=80" alt="Chat Application Screenshot" class="project-image" />
+        <div class="project-content">
+          <h3 class="project-title">Chat Application</h3>
+          <p class="project-description">Real-time client-server chat application developed with Java socket programming.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener noreferrer" tabindex="0"><i class="fab fa-github"></i> Code</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Back to portfolio navigation
+    const backBtn = document.getElementById('backPortfolioBtn');
+    backBtn.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+    backBtn.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.location.href = 'index.html';
+      }
+    });
+
+    // Smooth scroll on category buttons click
+    const categoryButtons = document.querySelectorAll('.category-button');
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const section = document.getElementById(targetId);
+        if (section) {
+          section.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+      });
+      button.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    // 3D tilt effect on category buttons for live gesture
+    function tiltEffect(event) {
+      const element = event.currentTarget;
+      const rect = element.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const xc = rect.width / 2;
+      const yc = rect.height / 2;
+      const rotateX = ((y - yc) / yc) * 12;
+      const rotateY = ((xc - x) / xc) * 12;
+      element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
+      element.style.boxShadow = '0 0 25px #4da6ffee, 0 0 35px #3399ffbb';
+    }
+    function resetTilt(event) {
+      const element = event.currentTarget;
+      element.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      element.style.boxShadow = '0 0 10px #4da6ff88';
+    }
+    categoryButtons.forEach(button => {
+      button.addEventListener('mousemove', tiltEffect);
+      button.addEventListener('mouseleave', resetTilt);
+      button.addEventListener('focus', (e) => {
+        e.currentTarget.style.transform = 'scale(1.07)';
+        e.currentTarget.style.boxShadow = '0 0 25px #4da6ffee, 0 0 35px #3399ffbb';
+      });
+      button.addEventListener('blur', resetTilt);
+    });
+  });
+</script>
+</body>
+</html>
+

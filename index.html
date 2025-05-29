@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Portfolio</title>
+<style>
+  /* RESET & BASE */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+    background: #000000;
+    color: #4da6ff;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  /* NAVIGATION */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #0a0a0acc;
+    backdrop-filter: blur(12px);
+    z-index: 999;
+    box-shadow: 0 2px 12px rgba(0,102,204,0.7);
+  }
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: #4da6ff;
+    user-select: none;
+    text-shadow: 0 0 8px #4da6ff;
+  }
+  .nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 1.7rem;
+  }
+  .nav-links li {
+    position: relative;
+  }
+  .nav-links a {
+    font-weight: 600;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+    color: #99cfff;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: #4da6ff;
+    text-shadow: 0 0 15px #4da6ff;
+  }
+  /* Hamburger Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background: #4da6ff;
+    border-radius: 2px;
+    transition: 0.3s ease;
+  }
+  /* MOBILE NAV */
+  @media (max-width: 768px) {
+    .nav-links {
+      position: fixed;
+      top: 60px;
+      right: -100%;
+      height: calc(100vh - 60px);
+      width: 220px;
+      background: #0a0a0aee;
+      flex-direction: column;
+      padding: 2rem 1rem;
+      gap: 2rem;
+      transition: right 0.3s ease;
+      box-shadow: -2px 0 15px rgba(77,166,255,0.6);
+    }
+    .nav-links.open {
+      right: 0;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  /* SECTIONS */
+  main {
+    max-width: 1100px;
+    margin: 80px auto 60px;
+    padding: 0 1rem;
+  }
+  section {
+    padding: 60px 0;
+    border-bottom: 1px solid #003366;
+  }
+  section:last-child {
+    border-bottom: none;
+  }
+  h2.section-title {
+    font-size: 2.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #4da6ff;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #4da6ffaa;
+  }
+  .underline {
+    width: 80px;
+    height: 4px;
+    background: #4da6ff;
+    margin: 0 auto 2rem;
+    border-radius: 2px;
+    box-shadow: 0 0 15px #4da6ffcc;
+  }
+  
+  /* HOME */
+  #home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  #home .home-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+  }
+  #home h1 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin: 0;
+    color: #4da6ff;
+    text-shadow: 0 0 12px #4da6ffcc;
+  }
+  #changing-word-container {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4da6ff; /* I am text color blue */
+    height: 44px;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+  }
+  #changing-word {
+    display: inline-block;
+    color: #ff3333; /* live changing word in red */
+    transition: opacity 0.2s ease;
+  }
+  /* Home buttons container */
+  #home .btn-group {
+    display: flex;
+    gap: 1.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  /* Blue themed buttons */
+  .btn {
+    background-color: #004080;
+    border: 2px solid #4da6ff;
+    color: #4da6ff;
+    font-weight: 700;
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #4da6ff88;
+    font-size: 1.1rem;
+    user-select: none;
+    perspective: 1000px;
+    transition: 
+      background-color 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+    outline-offset: 3px;
+  }
+  .btn:hover, .btn:focus {
+    background-color: #4da6ff;
+    color: #001a33;
+    box-shadow: 0 0 20px #4da6ffcc, 0 0 35px #3399ffcc;
+    outline: none;
+    transform: scale(1.07);
+  }
+  /* Photo Frame for Home */
+  #home .photo-frame {
+    width: 180px;
+    height: 180px;
+    border: 5px solid #4da6ff;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow:
+      0 0 12px #4da6ffcc,
+      inset 0 0 15px #337acc;
+    cursor: pointer;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    perspective: 800px;
+  }
+  #home .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform-style: preserve-3d;
+    transition: transform 0.35s ease;
+  }
+  /* Social buttons home (smaller icons) */
+  #home .socials {
+    display: flex;
+    gap: 1.3rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  #home .socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #004080;
+    border: 2px solid #4da6ff;
+    color: #4da6ff;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #4da6ffaa;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    user-select: none;
+    perspective: 900px;
+  }
+  #home .socials a:hover,
+  #home .socials a:focus {
+    background-color: #4da6ff;
+    color: #001a33;
+    box-shadow: 0 0 22px #4da6ffee,0 0 36px #33aaffee;
+    outline: none;
+    transform: scale(1.15);
+  }
+  /* Desktop layout for #home: side by side with photo right, text left */
+  @media (min-width: 769px) {
+    #home {
+      min-height: 80vh;
+      text-align: left;
+      align-items: center; /* center vertically */
+      justify-content: center;
+    }
+    #home .home-inner {
+      flex-direction: row;
+      max-width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+    #home .home-text {
+      flex: 1 1 50%;
+    }
+    #home .photo-frame {
+      flex: 0 0 320px;
+      width: 320px;
+      height: 320px;
+      border-radius: 20px;
+    }
+    #home .btn-group {
+      justify-content: flex-start;
+    }
+    #home .socials {
+      justify-content: flex-start;
+      margin-top: 1.4rem;
+    }
+  }
+
+  /* ABOUT */
+  #about {
+    text-align: center;
+  }
+  #about .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  #about .content {
+    flex: 1 1 350px;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #99cfff;
+    text-shadow: 0 0 5px #003366aa;
+    user-select: text;
+  }
+  #about .btn-resume {
+    margin-top: 1.8rem;
+  }
+  /* Resume button */
+  #about .btn-resume {
+    background-color: #004080;
+    border: 2px solid #4da6ff;
+    color: #4da6ff;
+    font-weight: 700;
+    padding: 0.75rem 2.1rem;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #4da6ff88;
+    font-size: 1.05rem;
+    user-select: none;
+    perspective: 1000px;
+    transition: 
+      background-color 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+    outline-offset: 3px;
+    display: inline-block;
+  }
+  #about .btn-resume:hover,
+  #about .btn-resume:focus {
+    background-color: #4da6ff;
+    color: #001a33;
+    box-shadow: 0 0 20px #4da6ffcc, 0 0 35px #3399ffcc;
+    outline: none;
+    transform: scale(1.07);
+  }
+  /* Photo Frame for About (live 3D tilt activated) */
+  #about .photo-frame {
+    flex: 0 0 220px;
+    height: 220px;
+    border: 5px solid #4da6ff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+      0 0 18px #4da6ffcc,
+      inset 0 0 15px #337acc;
+    cursor: pointer;
+    perspective: 900px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  #about .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform-style: preserve-3d;
+    transition: transform 0.35s ease;
+  }
+
+  /* EDUCATION */
+  #education .edu-list {
+    max-width: 900px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+  }
+  #education .edu-list li {
+    background: #001522;
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #4da6ffaa;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  #education .edu-list li:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px #4da6ffcc;
+  }
+  .edu-degree {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #3399ff;
+  }
+  .edu-institute {
+    margin-top: 0.25rem;
+    font-style: italic;
+    color: #80b3ff;
+  }
+  .edu-year {
+    margin-top: 0.15rem;
+    font-size: 0.9rem;
+    color: #4d88ff;
+  }
+
+  /* SKILLS */
+  #skills .skills-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(130px,1fr));
+    gap: 1rem;
+  }
+  .skill {
+    background: #001a40;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #4da6ffaa;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    color: #99cfff;
+    font-weight: 700;
+    user-select: none;
+  }
+  .skill:hover {
+    background-color: #004080;
+    color: #cce6ff;
+  }
+  .skill-name {
+    margin-top: 0.6rem;
+  }
+
+  /* PROJECTS */
+  #projects .projects-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+ 
+
+  .project-card {
+    background: #001522;
+    border-radius: 12px;
+    box-shadow: 0 0 18px #4da6ffbb;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+   
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #4da6ffdd;
+  }
+  .project-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 3px solid #3399ff;
+  }
+  .project-content {
+    padding: 1rem 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .project-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    color: #4da6ff;
+    text-shadow: 0 0 10px #3399ffdd;
+  }
+  .project-desc {
+    flex-grow: 1;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #a3cfff;
+  }
+  .project-links {
+    margin-top: 1rem;
+  }
+  .project-links a {
+    background-color: #004080;
+    color: #99cfff;
+    padding: 0.45rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-right: 0.7rem;
+    transition: 
+      background-color 0.3s ease, 
+      box-shadow 0.3s ease, 
+      transform 0.2s ease;
+    box-shadow: 0 0 6px #4da6ffaa;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+  }
+  .project-links a:hover,
+  .project-links a:focus {
+    background-color: #3399ff;
+    color: #001d33;
+    box-shadow: 0 0 18px #3399ffdd;
+    outline: none;
+    transform: scale(1.08);
+  }
+
+  .viewbtn {
+    background-color: #004080;
+    padding: 0.75rem 5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #99cfff;
+    cursor: pointer;
+    transition: 
+      background-color 0.3s ease, 
+      box-shadow 0.3s ease, 
+      transform 0.2s ease;
+    box-shadow: 0 0 8px #4da6ffbb;
+    perspective: 600px;
+    user-select: none;
+  
+  }
+  .viewbtn:hover,
+  .viewbtn:focus {
+    background-color: #3399ff;
+    color: #001d33;
+    box-shadow: 0 0 22px #3399ffdd;
+    transform: scale(1.05);
+    outline: none;
+  }
+ 
+
+
+
+  /* CERTIFICATES */
+  #certificates {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  #certificates .cert-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+  .cert-card {
+    background: #001522;
+    border-radius: 12px;
+    box-shadow: 0 0 18px #4da6ffbb;
+    padding: 1rem 1.2rem;
+    color: #add8ff;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    user-select: none;
+  }
+  .cert-card:hover {
+    box-shadow: 0 0 30px #4da6ffdd;
+    transform: translateY(-6px);
+  }
+  .cert-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+    color: #3399ff;
+    text-shadow: 0 0 8px #3399ffcc;
+  }
+  .cert-org {
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    color: #85b4ff;
+  }
+  .cert-year {
+    font-size: 0.9rem;
+    color: #a0c8ff;
+  }
+
+  /* CONTACT */
+  #contact .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  #contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+  }
+  #contact input, #contact textarea {
+    background: #001722;
+    border: 1.5px solid #4da6ff;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #99cfff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+  }
+  #contact input:focus, #contact textarea:focus {
+    outline: none;
+    border-color: #3399ff;
+    box-shadow: 0 0 10px #3399ffbb;
+  }
+  #contact button {
+    background-color: #004080;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #99cfff;
+    cursor: pointer;
+    transition: 
+      background-color 0.3s ease, 
+      box-shadow 0.3s ease, 
+      transform 0.2s ease;
+    box-shadow: 0 0 8px #4da6ffbb;
+    perspective: 600px;
+    user-select: none;
+  }
+  #contact button:hover,
+  #contact button:focus {
+    background-color: #3399ff;
+    color: #001d33;
+    box-shadow: 0 0 22px #3399ffdd;
+    transform: scale(1.05);
+    outline: none;
+  }
+  /* Social buttons contact (smaller icons) */
+  #contact .socials-contact {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  #contact .socials-contact a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #004080;
+    border: 2px solid #4da6ff;
+    color: #4da6ff;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #4da6ffaa;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    user-select: none;
+  }
+  #contact .socials-contact a:hover,
+  #contact .socials-contact a:focus {
+    background-color: #4da6ff;
+    color: #001a33;
+    box-shadow: 0 0 22px #4da6ffee,0 0 36px #33aaffee;
+    outline: none;
+    transform: scale(1.15);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #00264d;
+  }
+
+  /* PHOTO FRAME LIVE GESTURES */
+  .photo-frame:hover, .photo-frame:focus-within {
+    box-shadow:
+      0 0 25px #4da6ffee,
+      inset 0 0 25px #337acc;
+  }
+</style>
+<!-- Icons CDN from FontAwesome 6.4.0 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo" aria-label="Portfolio Logo" tabindex="0">SauReign Eskch</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section id="home" aria-label="Home Section">
+    <div class="home-inner">
+      <div class="home-text">
+        <h1>Hello, I'm <span style="color:#ffffff;">Saurav Kumar Rana</span></h1>
+        <div id="changing-word-container" aria-live="polite" aria-atomic="true" aria-relevant="text" role="status">
+          <span style="color:#3f86f0;">I'm into </span><span id="changing-word" style="color:#ff33b1;"> Software engineer</span>
+        </div>
+        <p> I'm a passionate developer focused on creating beautiful and functional web experiences.</p>
+        <div class="btn-group" aria-label="Home action buttons">
+          <button class="btn" id="hireMeBtn" type="button" tabindex="0">Hire Me</button>
+          <button class="btn" id="aboutBtn" type="button" tabindex="0">About</button>
+        </div>
+        <div class="socials" aria-label="Social media links - Home">
+          <a href="https://www.linkedin.com/in/sauravkumarrana/" target="_blank" rel="noopener" aria-label="LinkedIn" tabindex="0"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:sauravkumar222rana@gmail.com" aria-label="Email" tabindex="0"><i class="fas fa-envelope"></i></a>
+          <a href="https://github.com/SauravKumarRana1" target="_blank" rel="noopener" aria-label="GitHub" tabindex="0"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/saureign_eskch/" target="_blank" rel="noopener" aria-label="Instagram" tabindex="0"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@saureigneskch" target="_blank" rel="noopener" aria-label="YouTube" tabindex="0"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/rana_sauru?t=hOsVoRsPHbYMTWlv-JHFOA&s=35" target="_blank" rel="noopener" aria-label="X (formerly Twitter)" tabindex="0"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="photo-frame" tabindex="0" aria-label="Photo of Your Name">
+        <img src="b.jpg" alt="Portrait of Your Name" />
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-label="About Me Section">
+    <h2 class="section-title">About Me</h2>
+    <div class="underline"></div>
+    <div class="section-inner">
+      <div class="photo-frame" tabindex="0" aria-label="Photo About Me">
+        <img src="c.jpg" alt="About Me Photo" />
+      </div>
+      <div class="content">
+        <p>Hi, I'm <span style="color:#ff33b1;"> Saurav Kumar Rana </span> a passionate Software Engineer from Telangana. I am a dedicated web developer with experience in front-end and back-end technologies. I love designing sleek user interfaces and solving complex problems.</p>
+        <h4>Email: <span style="color:#ff33b1;">sauravkumar222rana@gmail.com</span></h4>
+        <h4>Place: <span style="color:#ff33b1;">Ramagundam,Telangana,India</span></h4>
+        <button class="btn btn-resume" id="resumeBtn" type="button" tabindex="0">Resume</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" aria-label="Education Section">
+    <h2 class="section-title">Education</h2>
+    <div class="underline"></div>
+    <ul class="edu-list">
+     
+      <li>
+        <div class="edu-degree" style="color:#ff33b1;">Bachelor of Technology in Computer Science</div>
+        <div class="edu-institute"><a href="http://tcek.ac.in/index.php">Trinity College of Engineering and technology peddapally, Telangana(JNTUH) </a></div>
+        <div class="edu-year">2023 - 2027 | Currently Enrolled</div>
+      </li>
+      <li>
+        <div class="edu-degree" style="color:#ff33b1;">Intermediate +2</div>
+        <div class="edu-institute"><a href="https://www.mountegmontschool.com/">Mount Egmont School Hazaribag, Jharkhand</a></div>
+        <div class="edu-year">2020 - 2022</div>
+      </li>
+      <li>
+        <div class="edu-degree" style="color:#ff33b1;">High School </div>
+        <div class="edu-institute"><a href="https://school.careers360.com/schools/jack-and-jill-school-hazaribagh">Jack And Jill School Hazaribag, Jharkhand</a></div>
+        <div class="edu-year">2012 - 2020</div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="skills" aria-label="Skills Section">
+    <h2 class="section-title">Skills</h2>
+    <div class="underline"></div>
+    <div class="skills-container">
+      <div class="skill"><div class="skill-name">HTML5</div></div>
+      <div class="skill"><div class="skill-name">CSS3</div></div>
+      <div class="skill"><div class="skill-name">JavaScript</div></div>
+      <div class="skill"><div class="skill-name">React</div></div>
+      <div class="skill"><div class="skill-name">Node.js</div></div>
+      <div class="skill"><div class="skill-name">Python</div></div>
+      <div class="skill"><div class="skill-name">SQL</div></div>
+      <div class="skill"><div class="skill-name">Git</div></div>
+      <div class="skill"><div class="skill-name">JAVA</div></div>
+      <div class="skill"><div class="skill-name">WORDPRESS</div></div>
+      <div class="skill"><div class="skill-name">GitHub</div></div>
+    </div>
+  </section>
+
+  <section id="projects" aria-label="Projects Section">
+    <h2 class="section-title">Projects</h2>
+    <div class="underline"></div>
+    <div class="projects-grid">
+      <article class="project-card">
+        <img class="project-img" src="a.gif" alt="Project 1 screenshot" />
+        <div class="project-content">
+          <h3 class="project-title">Calender</h3>
+          <p class="project-desc">A calender to show day after todays day on entering numbers of days.</p>
+          <div class="project-links">
+            <a href="https://sauravkumarrana1.github.io/calander/" target="_blank" rel="noopener noreferrer" tabindex="0">Live</a>
+            <a href="https://github.com/SauravKumarRana1/calander.git" target="_blank" rel="noopener noreferrer" tabindex="0">Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="project-card">
+        <img class="project-img" src="4.jpg" alt="Project 2 screenshot" />
+        <div class="project-content">
+          <h3 class="project-title">Calculator</h3>
+          <p class="project-desc">A simple calculator by using html css and JavaScript.</p>
+          <div class="project-links">
+            <a href="https://sauravkumarrana1.github.io/calc/" target="_blank" rel="noopener noreferrer" tabindex="0">Live</a>
+            <a href="https://github.com/SauravKumarRana1/calc.git" target="_blank" rel="noopener noreferrer" tabindex="0">Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="project-card">
+        <img class="project-img" src="4.jpg" alt="Project 2 screenshot" />
+        <div class="project-content">
+          <h3 class="project-title">Calculator</h3>
+          <p class="project-desc">A simple calculator by using html css and JavaScript.</p>
+          <div class="project-links">
+            <a href="https://sauravkumarrana1.github.io/calc/" target="_blank" rel="noopener noreferrer" tabindex="0">Live</a>
+            <a href="https://github.com/SauravKumarRana1/calc.git" target="_blank" rel="noopener noreferrer" tabindex="0">Code</a>
+          </div>
+        </div>
+      </article>
+      
+      
+      
+    </div>
+    <center>
+    <button class="viewbtn" id="goB">View All</button>
+    <script>
+      document.getElementById('goB').addEventListener('click',function(){
+        window.location.href = "projects.html";
+      });
+
+    </script>
+    </center>
+   
+  </section>
+
+  <section id="certificates" aria-label="Certificates Section">
+    <h2 class="section-title">Certificates</h2>
+    <div class="underline"></div>
+    <div class="cert-list">
+      <div class="cert-card" tabindex="0">
+        <div class="cert-title"><a href="https://www.credly.com/badges/86794571-d903-4fe0-bc54-895bf8b2e29d">Getting Started with Artificial Inteligence</a></div>
+        <div class="cert-org">IBM</div>
+        <div class="cert-year">2025</div>
+      </div>
+      <div class="cert-card" tabindex="0">
+        <div class="cert-title"><a href="https://onedrive.live.com/?qt=allmyphotos&photosData=%2Fshare%2F50F8D5049C67F6A4%21s93b0a035466c4da78af5829ced31e1d6%3Fithint%3Dphoto%26e%3Djayns8%26migratedtospo%3Dtrue&sw=bypassConfig&cid=50F8D5049C67F6A4&id=50F8D5049C67F6A4%21s93b0a035466c4da78af5829ced31e1d6&redeem=aHR0cHM6Ly8xZHJ2Lm1zL2kvYy81MGY4ZDUwNDljNjdmNmE0L0VUV2dzSk5zUnFkTml2V0NuTzB4NGRZQjBtWHhHSkw3cm9JckNKMUdMaWdFblE%5FZT1qYXluczg&v=photos">AI for Student:build your Own Generative AI Model </a></div>
+        <div class="cert-org">NxtWave</div>
+        <div class="cert-year">2023</div>
+      </div>
+      <div class="cert-card" tabindex="0">
+        <div class="cert-title">JavaScript Advanced Certification</div>
+        <div class="cert-org">Tech Platform</div>
+        <div class="cert-year">2021</div>
+      </div>
+    </div>
+    <center>
+    <button class="viewbtn" type="button" id="goButton">View All</button>
+    </center>
+    <script>
+      document.getElementById('goButton').addEventListener('click',function(){
+        window.location.href = "certificates.html";
+      });
+
+    </script>
+  </section>
+
+  <section id="contact" aria-label="Contact Section">
+    <h2 class="section-title">Contact Me</h2>
+    <div class="underline"></div>
+    <div class="contact-form">
+      <form id="contactForm" action="javascript:void(0);" aria-label="Contact form">
+        <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true" />
+        <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true"/>
+        <textarea id="message" name="message" rows="5" placeholder="Your Message" required aria-required="true"></textarea>
+        <button type="submit" tabindex="0">Send Message</button>
+      </form>
+      <p id="formMessage" role="alert" aria-live="assertive" style="margin-top:10px;"></p>
+    </div>
+
+    <div class="socials-contact" aria-label="Social media links - Contact">
+      <a href="https://linkedin.com/in/sauravkumarrana/" target="_blank" rel="noopener" aria-label="LinkedIn" tabindex="0"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:sauravkumar222rana@gmail.com" aria-label="Email" tabindex="0"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/SauravKumarRana1" target="_blank" rel="noopener" aria-label="GitHub" tabindex="0"><i class="fab fa-github"></i></a>
+      <a href="https://instagram.com/saureign_eskch/" target="_blank" rel="noopener" aria-label="Instagram" tabindex="0"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com/@saureigneskch" target="_blank" rel="noopener" aria-label="YouTube" tabindex="0"><i class="fab fa-youtube"></i></a>
+      <a href="https://x.com/rana_sauru?t=hOsVoRsPHbYMTWlv-JHFOA&s=35" target="_blank" rel="noopener" aria-label="X (formerly Twitter)" tabindex="0"><i class="fab fa-twitter"></i></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2024 SauravKumrRana. All rights reserved.</p>
+</footer>
+
+<script>
+  // MOBILE NAVIGATION TOGGLE
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Close nav menu on nav-link click, for mobile
+ navLinks.querySelectorAll('a').forEach(link => {
+ link.addEventListener('click', () => {
+ if(navLinks.classList.contains('open')){
+ navLinks.classList.remove('open');
+ }
+ });
+});
+
+
+
+  // Keyboard accessible hamburger toggle
+  hamburger.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navLinks.classList.toggle('open');
+    }
+  });
+
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section');
+  const navItems = document.querySelectorAll('.nav-links a');
+
+  function setActiveNav() {
+    let index = sections.length;
+
+    while(--index && window.scrollY + 120 < sections[index].offsetTop) {}
+    navItems.forEach(link => link.classList.remove('active'));
+    navItems[index].classList.add('active');
+  }
+
+  window.addEventListener('scroll', setActiveNav);
+
+  // Contact form validation + simple confirmation message
+  const contactForm = document.getElementById('contactForm');
+  const formMessage = document.getElementById('formMessage');
+
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = contactForm.name.value.trim();
+    const email = contactForm.email.value.trim();
+    const message = contactForm.message.value.trim();
+
+    if(name && email && message) {
+      const mailtoLink = 'mailto:sauravkumar222rana@gmail.com?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + "\n\nFrom:" + name + " (" + email +")")}';
+      window.location.href = mailtoLink;
+      formMessage.style.color = '#66ff66';
+      formMessage.textContent = `Thank you, ${name}! Your message has been sent.`;
+      contactForm.reset();
+    } else {
+      formMessage.style.color = '#ff4d4d';
+      formMessage.textContent = 'Please fill in all fields correctly.';
+    }
+  });
+
+  // LIVE GESTURE - 3D tilt effect on photo frames and buttons
+  function tiltEffect(event) {
+    const element = event.currentTarget;
+    const rect = element.getBoundingClientRect();
+    const x = event.clientX - rect.left; // cursor x within element
+    const y = event.clientY - rect.top;  // cursor y within element
+
+    // Calculate center position
+    const xc = rect.width / 2;
+    const yc = rect.height / 2;
+
+    // Calculate rotation (-15deg to +15deg)
+    const rotateX = ((y - yc) / yc) * 15;
+    const rotateY = ((xc - x) / xc) * 15;
+
+    const inner = element.querySelector('img') || element; // use img inside frame or the element itself for buttons
+    inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
+
+    element.style.boxShadow = `0 0 25px #4da6ffee, inset 0 0 25px #3388ccaa`;
+  }
+
+  function resetTilt(event) {
+    const element = event.currentTarget;
+    const inner = element.querySelector('img') || element;
+    inner.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    element.style.boxShadow = '';
+    if(element.classList.contains('photo-frame')) {
+      element.style.boxShadow = '0 0 15px #4da6ffcc, inset 0 0 12px #337acc';
+    } else if(element.tagName.toLowerCase() === 'button' || element.classList.contains('project-links') || element.classList.contains('socials') || element.classList.contains('socials-contact')) {
+      element.style.boxShadow = '0 0 8px #4da6ffbb';
+    }
+  }
+
+  // Apply gestures to photo frames
+  const photoFrames = document.querySelectorAll('.photo-frame');
+  photoFrames.forEach(frame => {
+    frame.addEventListener('mousemove', tiltEffect);
+    frame.addEventListener('mouseleave', resetTilt);
+    frame.addEventListener('focus', () => {
+      const inner = frame.querySelector('img');
+      inner.style.transform = 'scale(1.07)';
+      frame.style.boxShadow = '0 0 25px #4da6ffee, inset 0 0 25px #3388ccaa';
+    });
+    frame.addEventListener('blur', resetTilt);
+  });
+
+  // Apply gestures to project links buttons
+  const projectButtons = document.querySelectorAll('.project-links a');
+  projectButtons.forEach(button => {
+    button.style.transition += ', transform 0.2s ease';
+    button.addEventListener('mousemove', tiltEffect);
+    button.addEventListener('mouseleave', resetTilt);
+    button.addEventListener('focus', e => {
+      e.currentTarget.style.transform = 'scale(1.08)';
+      e.currentTarget.style.boxShadow = '0 0 20px #4da6ffcc';
+    });
+    button.addEventListener('blur', resetTilt);
+  });
+ 
+  // Apply gestures to contact submit button
+  const contactButton = document.querySelector('#contact button');
+  contactButton.addEventListener('mousemove', tiltEffect);
+  contactButton.addEventListener('mouseleave', resetTilt);
+  contactButton.addEventListener('focus', e => {
+    e.currentTarget.style.transform = 'scale(1.05)';
+    e.currentTarget.style.boxShadow = '0 0 20px #4da6ffcc';
+  });
+  contactButton.addEventListener('blur', resetTilt);
+
+  // Apply gestures to home buttons (Hire Me, About)
+  const homeBtns = document.querySelectorAll('#home .btn');
+  homeBtns.forEach(btn => {
+    btn.addEventListener('mousemove', tiltEffect);
+    btn.addEventListener('mouseleave', resetTilt);
+    btn.addEventListener('focus', e => {
+      e.currentTarget.style.transform = 'scale(1.07)';
+      e.currentTarget.style.boxShadow = '0 0 20px #4da6ffcc';
+    });
+    btn.addEventListener('blur', resetTilt);
+  });
+
+  // Apply gesture to about resume button
+  const resumeBtn = document.getElementById('resumeBtn');
+  resumeBtn.addEventListener('mousemove', tiltEffect);
+  resumeBtn.addEventListener('mouseleave', resetTilt);
+  resumeBtn.addEventListener('focus', e => {
+    e.currentTarget.style.transform = 'scale(1.07)';
+    e.currentTarget.style.boxShadow = '0 0 20px #4da6ffcc';
+  });
+  resumeBtn.addEventListener('blur', resetTilt);
+
+  // Apply gestures to socials on home and contact
+  const socialLinks = document.querySelectorAll('#home .socials a, #contact .socials-contact a');
+  socialLinks.forEach(link => {
+    link.addEventListener('mousemove', tiltEffect);
+    link.addEventListener('mouseleave', resetTilt);
+    link.addEventListener('focus', e => {
+      e.currentTarget.style.transform = 'scale(1.15)';
+      e.currentTarget.style.boxShadow = '0 0 22px #4da6ffdd,0 0 36px #33aaffee';
+    });
+    link.addEventListener('blur', resetTilt);
+  });
+
+  // Dynamic changing word effect in home section
+  const words = ["Software Engineer", "UI/UX", "YouTube", "Frontend", "Arts"];
+  const changingWordElem = document.getElementById('changing-word');
+  let wordIndex = 0;
+
+  function cycleWords() {
+    changingWordElem.style.opacity = 0;
+    setTimeout(() => {
+      wordIndex = (wordIndex + 1) % words.length;
+      changingWordElem.textContent = words[wordIndex];
+      changingWordElem.style.opacity = 1;
+    }, 600);
+  }
+  setInterval(cycleWords, 3000);
+
+  // Button anchors for Hire Me, About, Resume
+  document.getElementById('hireMeBtn').addEventListener('click', () => {
+    window.location.href = '#contact';
+  });
+  document.getElementById('aboutBtn').addEventListener('click', () => {
+    window.location.href = '#about';
+  });
+  document.getElementById('resumeBtn').addEventListener('click', () => {
+    // Provide your actual resume url here or sample pdf file
+    window.open('https://example.com/your_resume.pdf', '_blank', 'noopener');
+  });
+
+</script>
+
+</body>
+</html>

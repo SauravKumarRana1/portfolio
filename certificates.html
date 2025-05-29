@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Certificates - Portfolio</title>
+<style>
+  /* RESET & BASE */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000000;
+    color: #4da6ff;
+    scroll-behavior: smooth;
+  }
+  a {
+    color: #4da6ff;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    color: #3399ff;
+    outline: none;
+  }
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #0a0a0acc;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 12px rgba(77,166,255,0.7);
+    z-index: 1000;
+  }
+  nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1rem;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: #4da6ff;
+    text-shadow: 0 0 8px #4da6ffbb;
+    user-select: none;
+  }
+  .nav-link {
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    color: #99cfff;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+  .nav-link:hover, .nav-link:focus {
+    background-color: #4da6ff44;
+    color: #4da6ff;
+    outline: none;
+  }
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 90px auto 60px;
+    padding: 0 1rem 40px;
+  }
+  h1.page-title {
+    font-size: 3.25rem;
+    font-weight: 900;
+    text-align: center;
+    user-select: none;
+    margin-bottom: 1rem;
+    color: #4da6ff;
+    text-shadow: 0 0 18px #3399ffcc;
+  }
+  /* Buttons below page title */
+  .category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .category-button {
+    background-color: #004080;
+    border: 2px solid #4da6ff;
+    color: #4da6ff;
+    font-weight: 700;
+    padding: 0.7rem 2rem;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #4da6ff88;
+    font-size: 1.05rem;
+    user-select: none;
+    perspective: 1000px;
+    transition: 
+      background-color 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+  }
+  .category-button:hover, 
+  .category-button:focus {
+    background-color: #4da6ff;
+    color: #001a33;
+    box-shadow: 0 0 22px #4da6ffcc, 0 0 40px #3399ffcc;
+    outline: none;
+    transform: scale(1.07);
+  }
+  /* Section titles */
+  section {
+    margin-top: 3rem;
+  }
+  section h2.section-subtitle {
+    font-size: 2.2rem;
+    color: #3399ff;
+    margin-bottom: 1.2rem;
+    border-bottom: 3px solid #4da6ff;
+    display: inline-block;
+    padding-bottom: 6px;
+    user-select: none;
+    text-shadow: 0 0 12px #3399ffcc;
+  }
+  /* Certificates grid */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    gap: 1.8rem;
+  }
+  /* Certificate card */
+  .cert-card {
+    background: #001722;
+    border-radius: 14px;
+    box-shadow: 0 0 18px #4da6ffcc;
+    padding: 1.2rem 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .cert-card:hover, .cert-card:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #3399ffee;
+    outline: none;
+  }
+  .cert-title {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #4da6ff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 12px #3399ffaa;
+  }
+  .cert-org {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #a3cfff;
+    margin-bottom: 0.3rem;
+  }
+  .cert-year {
+    font-size: 0.95rem;
+    color: #7db3ff;
+    margin-top: auto;
+  }
+  /* Responsive tweaks */
+  @media (max-width: 480px) {
+    main {
+      margin-top: 70px;
+      padding-bottom: 30px;
+    }
+  }
+</style>
+<!-- FontAwesome icons for potential use -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo" tabindex="0">SauReign Eskch</div>
+    <div class="nav-link" role="link" tabindex="0" id="backPortfolioBtn" aria-label="Back to main portfolio page">← Back to Portfolio</div>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title">Certificates</h1>
+
+  <!-- Category buttons -->
+  <div class="category-buttons" role="navigation" aria-label="Certificate category navigation">
+    <button class="category-button" data-target="html-certs" type="button">HTML</button>
+    <button class="category-button" data-target="python-certs" type="button">Python</button>
+    <button class="category-button" data-target="java-certs" type="button">Java</button>
+  </div>
+
+  <section id="html-certs" aria-label="HTML Certificates">
+    <h2 class="section-subtitle">HTML Certificates</h2>
+    <div class="certs-grid">
+      <article class="cert-card" tabindex="0">
+        <div class="cert-title">Certified HTML5 Developer</div>
+        <div class="cert-org">WebTech Academy</div>
+        <div class="cert-year">2022</div>
+      </article>
+      <article class="cert-card" tabindex="0">
+        <div class="cert-title">Responsive Web Design Certificate</div>
+        <div class="cert-org">FreeCodeCamp</div>
+        <div class="cert-year">2023</div>
+      </article>
+    </div>
+  </section>
+
+  <section id="python-certs" aria-label="Python Certificates">
+    <h2 class="section-subtitle">Python Certificates</h2>
+    <div class="certs-grid">
+      <article class="cert-card" tabindex="0">
+        <div class="cert-title">Python Programming Masterclass</div>
+        <div class="cert-org">Udemy</div>
+        <div class="cert-year">2023</div>
+      </article>
+      <article class="cert-card" tabindex="0">
+        <div class="cert-title">Data Science with Python</div>
+        <div class="cert-org">Coursera</div>
+        <div class="cert-year">2022</div>
+      </article>
+    </div>
+  </section>
+
+  <section id="java-certs" aria-label="Java Certificates">
+    <h2 class="section-subtitle">Java Certificates</h2>
+    <div class="certs-grid">
+      <article class="cert-card" tabindex="0">
+        <div class="cert-title">Java SE Programmer</div>
+        <div class="cert-org">Oracle University</div>
+        <div class="cert-year">2021</div>
+      </article>
+      <article class="cert-card" tabindex="0">
+        <div class="cert-title">Java Web Developer</div>
+        <div class="cert-org">Tech Institute</div>
+        <div class="cert-year">2023</div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p style="text-align:center; color:#00264d; font-size:0.9rem; padding-bottom:15px;">© 2024 saurav kumar rana. All rights reserved.</p>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Back to portfolio navigation
+    const backBtn = document.getElementById('backPortfolioBtn');
+    backBtn.addEventListener('click', () => {
+      window.location.href = 'index.html'; 
+    });
+    backBtn.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.location.href = 'index.html';
+      }
+    });
+
+    // Smooth scroll on category buttons click
+    const categoryButtons = document.querySelectorAll('.category-button');
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const section = document.getElementById(targetId);
+        if (section) {
+          section.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+      });
+      button.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    // 3D tilt effect on category buttons for live gesture
+    function tiltEffect(event) {
+      const element = event.currentTarget;
+      const rect = element.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const xc = rect.width / 2;
+      const yc = rect.height / 2;
+      const rotateX = ((y - yc) / yc) * 12;
+      const rotateY = ((xc - x) / xc) * 12;
+      element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
+      element.style.boxShadow = '0 0 25px #4da6ffee, 0 0 35px #3399ffbb';
+    }
+    function resetTilt(event) {
+      const element = event.currentTarget;
+      element.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      element.style.boxShadow = '0 0 10px #4da6ff88';
+    }
+    categoryButtons.forEach(button => {
+      button.addEventListener('mousemove', tiltEffect);
+      button.addEventListener('mouseleave', resetTilt);
+      button.addEventListener('focus', (e) => {
+        e.currentTarget.style.transform = 'scale(1.07)';
+        e.currentTarget.style.boxShadow = '0 0 25px #4da6ffee, 0 0 35px #3399ffbb';
+      });
+      button.addEventListener('blur', resetTilt);
+    });
+  });
+</script>
+</body>
+</html>
